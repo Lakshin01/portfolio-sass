@@ -1,9 +1,44 @@
-
 // Variables
 $primary-color: #3498db;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 // Base styles
 body {
   font-family: Arial, sans-serif;
   background-color: $primary-color;
+}
+
+#header {
+  // For Header to be stuck to top throughout the scroll.
+  position: sticky;
+  top: 0;
+
+  display: flex;
+  justify-content: space-between; // Needed for space between left part of text and right.
+  align-items: center;
+  padding: 15px;
+  background-color: #f2f2f2;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+
+  .left {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .right {
+    a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #333;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }
