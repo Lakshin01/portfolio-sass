@@ -1,12 +1,10 @@
 # Portfolio - framework
 
-
 Goal is to create a customizable framework. with raw scss.
-
 
 # Setup
 
- Install SASS
+Install SASS
 https://sass-lang.com/install/
 
 build script
