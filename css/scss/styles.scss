@@ -1,8 +1,56 @@
 // Variables
 $primary-color: #3498db;
+$grey: #333;
+$lighter-gray: #626262;
+$header-height: 10vh;
+$black: #000;
 
-// added this because there was between header and top and sides of page. so this resets those default configs.
+// New Variable: Section Colors
+$section-colors: (
+  publications: #f4f4f4,
+  projects: #e6f7ff,
+  education: #fff4e6,
+  workxp: #e6ffe6,
+  blog: #ffe6f2,
+  misc: #e6e6e6,
+);
 
+// General Section Styles
+section {
+  min-height: calc(100vh - #{$header-height});
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  // Subtle fade-in animation
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    70% {
+      opacity: 0.3;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  animation: fadeIn 1s ease-in;
+
+  // Loop through each section and apply unique styles
+  @each $name, $color in $section-colors {
+    &#{$name} {
+      background-color: $color;
+    }
+  }
+
+  h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+}
+
+//Global Defaults and removing bad default formattings for cleaner start.
 * {
   margin: 0;
   padding: 0;
@@ -36,11 +84,207 @@ body {
     a {
       margin: 0 15px;
       text-decoration: none;
-      color: #333;
+      color: grey;
 
       &:hover {
         text-decoration: underline;
       }
     }
   }
+}
+
+// Landing Section
+
+#landing {
+  min-height: calc(
+    100vh - 5vh
+  ); // Fill the rest of the screen using viewport height
+  background-color: $primary-color;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    text-decoration: none; // Removes underline
+    color: $grey; // Use your primary color
+    transition: color 0.3s ease; // Smooth color transition
+
+    &:hover,
+    &:focus {
+      color: darken($black, 20%); // Darken on hover
+      text-decoration: underline; // Optional: underline on hover
+    }
+
+    &:active {
+      color: lighten($lighter-gray, 20%); // Lighten on click
+    }
+  }
+
+  h1 {
+    font-size: 3em; // em is relative to the font-size of its closest parent
+    margin-bottom: 0.5em;
+    animation: slideInFromLeft 1s ease-in-out;
+  }
+
+  p {
+    font-size: 1.2em;
+    // Subtle text animation
+    animation: slideInFromRight 1s ease-out;
+  }
+
+  .portrait {
+    border-radius: 50%; // Rounded corners
+    // width: 100px; // Adjust according to your need, this sets a fixed width
+    height: auto; // Keeps the aspect ratio
+    flex-shrink: 0; // Prevents the image from shrinking
+    width: 10%; // You can adjust this percentage based on how large you want the image to be
+    margin-right: 1em;
+    //animation: slideInFromTop 1s ease-in;
+  }
+  .text-section {
+    h1 {
+      font-size: 3em;
+      margin-bottom: 0.2em;
+    }
+
+    .tagline {
+      font-size: 1.2em;
+    }
+  }
+
+  .description {
+    margin-left: 2em;
+    font-size: 1em;
+  }
+
+  @keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    95% {
+      opacity: 0.2;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInFromRight {
+    0% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}
+// .container {
+//   display: flex;
+//   align-items: flex-start; /* To align items at the top */
+// }
+
+.left-side {
+  flex-basis: calc(50% - 1em);
+  display: flex;
+  align-items: center;
+  position: -20%;
+}
+
+.description {
+  font-size: 1.8em;
+  word-wrap: break-word;
+  margin-top: 0; /* To align with the name and picture */
+}
+
+.social-icons {
+  margin-top: 1em;
+
+  a {
+    margin: 0 10px;
+    font-size: 24px;
+  }
+}
+
+// Footer Style
+#footer {
+  min-height: 5vh; // Using vh for responsive height
+  background-color: darken($grey, 10%);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    margin: 0;
+    padding: 0;
+    font-size: 0.8em; // Using em for responsive font size
+  }
+}
+
+//publications
+$resume-font-size: 1.6em;
+$viewport-height: 100vh;
+
+#publications {
+  background-color: #555;
+}
+.resume-section {
+  max-height: $viewport-height;
+  overflow-y: auto;
+}
+
+.resume-por {
+  margin-bottom: 1.5em;
+
+  h3 {
+    font-size: $resume-font-size;
+    margin-bottom: 0.5em;
+  }
+
+  .club-event {
+    font-size: $resume-font-size * 0.8;
+    margin-bottom: 1em;
+  }
+
+  .resume-item-list {
+    list-style-type: disc;
+    margin-left: 2em;
+
+    li {
+      font-size: $resume-font-size * 0.9;
+      margin-bottom: 0.5em;
+
+      .acceptance-rate {
+        font-size: $resume-font-size * 0.8;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+#sections .section {
+  margin-top: 1.5em;
+}
+
+#sections h2 {
+  background-color: #f2f2f2;
+  padding: 0.5em;
+  margin: 0;
+}
+
+.sub-section h3 {
+  margin: 0.5em 0;
+  font-size: 1.2em;
+}
+
+.sub-section p {
+  margin: 0.2em 0;
+  font-size: 1em;
 }
